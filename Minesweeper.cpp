@@ -311,7 +311,6 @@ int main() {
 	placeMines(playingField, sizeOfField, numberOfMines);
 	countMines(playingField, sizeOfField);
 	printField(visibleValuesOfField, sizeOfField);
-	printField(playingField, sizeOfField);
 	printDirections();
 	createFunctionality(visibleValuesOfField, playingField, sizeOfField, numberOfMines);
 }
