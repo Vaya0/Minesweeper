@@ -278,7 +278,7 @@ void createFunctionality(char visibleValuesOfField[][N], char playingField[][N],
 
 			printField(visibleValuesOfField, sizeOfField);
 
-			if (movesLeft == 0) {
+			if (numberOfMines == 0 && movesLeft == 0) {
 				std::cout << "Congratulations, You won !!! (^ o ^)" << std::endl;
 				gameLost = true;
 				break;
