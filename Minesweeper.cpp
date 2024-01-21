@@ -29,7 +29,7 @@ void printField(char visibleValuesOfField[][N], int sizeOfField) {
 		for (int coll = 0; coll < sizeOfField; coll++) {
 			std::cout << "{" << visibleValuesOfField[row][coll] << "}";
 		}
-	    std::cout << std::endl;
+		std::cout << std::endl;
 	}
 	std::cout << std::endl;
 
@@ -153,7 +153,7 @@ void countMines(char playingField[][N], int sizeOfField) {//minavame prez tsqlat
 	}
 }
 
-bool isValidUserInput(int row, int coll, char command, int sizeOfField){
+bool isValidUserInput(int row, int coll, char command, int sizeOfField) {
 	return (command == '@' || command == '#' || command == '$')
 		&& row >= 0 && row < sizeOfField && coll >= 0 && coll < sizeOfField;
 }
@@ -278,7 +278,7 @@ void createFunctionality(char visibleValuesOfField[][N], char playingField[][N],
 
 			printField(visibleValuesOfField, sizeOfField);
 
-			if (numberOfMines == 0 && movesLeft == 0) {
+			if (numberOfMines == 0 || movesLeft == 0 ) {
 				std::cout << "Congratulations, You won !!! (^ o ^)" << std::endl;
 				gameLost = true;
 				break;
