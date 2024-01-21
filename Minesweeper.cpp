@@ -9,7 +9,7 @@
 * @idnumber 5MI0600284
 * @compiler VC
 *
-* <предназначение на файла>
+* <minesweeper game>
 *
 */
 
@@ -25,11 +25,11 @@ void printDirections() {
 
 void printField(char visibleValuesOfField[][N], int sizeOfField) {
 
-	for (int row = 0; row < sizeOfField; row++){
-		for (int coll = 0; coll < sizeOfField; coll++){
+	for (int row = 0; row < sizeOfField; row++) {
+		for (int coll = 0; coll < sizeOfField; coll++) {
 			std::cout << "{" << visibleValuesOfField[row][coll] << "}";
 		}
-		std::cout << std::endl;
+	    std::cout << std::endl;
 	}
 	std::cout << std::endl;
 
@@ -61,19 +61,16 @@ void fillPlayingFieldWithValues(char playingField[][N], char value) {
 
 void isValidCoordinatesForMine(int& row, int& coll, int sizeOfField) {
 
-	while (row >= sizeOfField)
-	{
+	while (row >= sizeOfField) {
 		row = rand() % 10;
 	}
-	while (coll >= sizeOfField)
-	{
+	while (coll >= sizeOfField) {
 		coll = rand() % 10;
 	}
 
 }
 
-bool isAlreadyAssignedValue(char element)
-{
+bool isAlreadyAssignedValue(char element) {
 	return element == '*';//ako elementut veche e bomba
 }
 
@@ -156,8 +153,7 @@ void countMines(char playingField[][N], int sizeOfField) {//minavame prez tsqlat
 	}
 }
 
-bool isValidUserInput(int row, int coll, char command, int sizeOfField)
-{
+bool isValidUserInput(int row, int coll, char command, int sizeOfField){
 	return (command == '@' || command == '#' || command == '$')
 		&& row >= 0 && row < sizeOfField && coll >= 0 && coll < sizeOfField;
 }
@@ -166,14 +162,14 @@ bool isValidUserInput(int row, int coll, char command, int sizeOfField)
 void mark(char visibleValuesOfField[][N], const char playingField[][N], int sizeOfField,
 	int row, int coll, unsigned& numberOfFlagsLeft, int& numberOfMines) {
 
-	if (visibleValuesOfField[row][coll] == '#') {//if marked
+	if (visibleValuesOfField[row][coll] == '#') {
 		std::cout << "You have already marked this cell! " << std::endl;
 	}
-	else if (visibleValuesOfField[row][coll] != ' ') {//has the number of mines near it
+	else if (visibleValuesOfField[row][coll] != ' ') {
 		std::cout << "You have already opened this cell! " << std::endl;
 	}
 	else {
-		visibleValuesOfField[row][coll] = '#';//mark it
+		visibleValuesOfField[row][coll] = '#';
 		numberOfFlagsLeft--;
 		if (playingField[row][coll] == '*') {
 			numberOfMines--;
@@ -187,8 +183,9 @@ void unmark(char visibleValuesOfField[][N], const char playingField[][N], int si
 	if (visibleValuesOfField[row][coll] == '#') {
 		visibleValuesOfField[row][coll] = ' ';
 		numberOfFlagsLeft += 1;
-		if (visibleValuesOfField[row][coll] == ' ' && playingField[row][coll] == '*')
+		if (visibleValuesOfField[row][coll] == ' ' && playingField[row][coll] == '*') {
 			numberOfMines += 1;
+		}
 	}
 	else {
 		std::cout << "You cannot unmark a cell that has not been flagged as a possible mine yet! " << std::endl;
@@ -196,9 +193,9 @@ void unmark(char visibleValuesOfField[][N], const char playingField[][N], int si
 }
 
 void openAdjacent(char playingField[][N], char visibleValuesOfField[][N], int sizeOfField, int row, int coll, bool& gameLost, int& movesLeft) {
-	if (row < 0 || row >= sizeOfField || coll < 0 || coll >= sizeOfField || visibleValuesOfField[row][coll] != ' ')
+	if (row < 0 || row >= sizeOfField || coll < 0 || coll >= sizeOfField || visibleValuesOfField[row][coll] != ' ') {
 		return;
-
+	}
 	visibleValuesOfField[row][coll] = playingField[row][coll];
 	movesLeft--;
 
@@ -229,7 +226,6 @@ void open(char playingField[][N], char visibleValuesOfField[][N], int sizeOfFiel
 		std::cout << "Unable to open marked cell! (~~ o ~~)";
 		return;
 	}
-
 	else if (visibleValuesOfField[row][coll] != ' ') {
 		std::cout << "Cell is already opened! (`` ^ ``) " << std::endl;
 		return;
@@ -247,10 +243,7 @@ void open(char playingField[][N], char visibleValuesOfField[][N], int sizeOfFiel
 				}
 			}
 		}
-
 	}
-
-
 	gameLost = false;
 }
 
@@ -285,8 +278,7 @@ void createFunctionality(char visibleValuesOfField[][N], char playingField[][N],
 
 			printField(visibleValuesOfField, sizeOfField);
 
-			if (movesLeft == 0)
-			{
+			if (movesLeft == 0) {
 				std::cout << "Congratulations, You won !!! (^ o ^)" << std::endl;
 				gameLost = true;
 				break;
