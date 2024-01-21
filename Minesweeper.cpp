@@ -18,9 +18,9 @@
 constexpr int N = 10;
 
 void printDirections() {
-	std::cout << "If You want to open a cell, please enter: @";
-	std::cout << "If You want to mark a cell as a possible mine, please enter: #";
-	std::cout << "If You want to unmark said cell, please enter: $";
+	std::cout << "If You want to open a cell, please enter: @" << std::endl;
+	std::cout << "If You want to mark a cell as a possible mine, please enter: #" << std::endl;
+	std::cout << "If You want to unmark said cell, please enter: $" << std::endl;
 }
 
 void printField(char visibleValuesOfField[][N], int sizeOfField) {
