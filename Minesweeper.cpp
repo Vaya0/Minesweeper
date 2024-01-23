@@ -35,14 +35,14 @@ void printField(char visibleValuesOfField[][N], int sizeOfField) {
 
 }
 
-void isValidSizeOfField(int& sizeOfField) {
+void ValidSizeOfField(int& sizeOfField) {
 	while (sizeOfField < 3 || sizeOfField>10) {
 		std::cout << "Incorrect size (0 m 0)! Please enter a number that is between 3 and 10!: " << std::endl;
 		std::cin >> sizeOfField;
 	}
 }
 
-void isValidNumberOfMines(int& numberOfMines, int& sizeOfField) {
+void ValidNumberOfMines(int& numberOfMines, int& sizeOfField) {
 	while (numberOfMines < 1 || numberOfMines > 3 * sizeOfField) {
 		std::cout << "Incorrect size (0 m 0)! Please enter a number that is between 1 and" << sizeOfField * 3 << "!: " << std::endl;
 		std::cin >> numberOfMines;
@@ -59,33 +59,27 @@ void fillPlayingFieldWithValues(char playingField[][N], char value) {
 
 }
 
-void isValidCoordinatesForMine(int& row, int& coll, int sizeOfField) {
-
-	while (row >= sizeOfField) {
-		row = rand() % 10;
-	}
-	while (coll >= sizeOfField) {
+void ValidCoordinatesForMine(int& row, int& coll, int sizeOfField) {
+		row = rand() % sizeOfField;
 		coll = rand() % 10;
-	}
-
 }
 
 bool isAlreadyAssignedValue(char element) {
-	return element == '*';//ako elementut veche e bomba
+	return element == '*';
 }
 
 void placeMines(char playingField[][N], int sizeOfField, int numberOfMines) {
 
-	srand(int(0));
+	srand(time(0));
 
 	for (int i = 1; i <= numberOfMines; i++) {
 		int row = rand() % 10;
-		int coll = rand() % 10;// davame nqkakvi koordinati, no ne sme sigurnu che te shte popadnat v poleto
+		int coll = rand() % 10;
 
-		isValidCoordinatesForMine(row, coll, sizeOfField);// ako sa tvurde golemi produljavame da priemame novi i novi
+		isValidCoordinatesForMine(row, coll, sizeOfField);
 
-		if (isAlreadyAssignedValue(playingField[row][coll])) {// dali veche e slojena mina, zashtoto random chisla moche da se povtarqt
-			i--;//podsigurqvame se che ako koordinatite sa bili ok, no veche e imalo, nqma da slojim vtora mina na sushtoto mqsto
+		if (isAlreadyAssignedValue(playingField[row][coll])) {
+			i--;
 		}
 		else {
 			playingField[row][coll] = '*';
@@ -143,7 +137,7 @@ void countMinesAroundEachElement(char playingField[][N], int sizeOfField, int ro
 	playingField[row][coll] = getCharFromInt(count);
 }
 
-void countMines(char playingField[][N], int sizeOfField) {//minavame prez tsqlata matritsa
+void countMines(char playingField[][N], int sizeOfField) {
 	for (int row = 0; row < sizeOfField; row++) {
 		for (int coll = 0; coll < sizeOfField; coll++) {
 			if (playingField[row][coll] != '*') {
@@ -153,7 +147,7 @@ void countMines(char playingField[][N], int sizeOfField) {//minavame prez tsqlat
 	}
 }
 
-bool isValidUserInput(int row, int coll, char command, int sizeOfField) {
+bool ValidUserInput(int row, int coll, char command, int sizeOfField) {
 	return (command == '@' || command == '#' || command == '$')
 		&& row >= 0 && row < sizeOfField && coll >= 0 && coll < sizeOfField;
 }
@@ -256,7 +250,7 @@ void createFunctionality(char visibleValuesOfField[][N], char playingField[][N],
 	int row;
 	int coll;
 
-	do {//ako e s while ne mojem da ispolzvame promenlivite pri proverkata 
+	do {
 		std::cout << "Please enter the desired command {@, #, $} and the coordinates of the cell that You have chosen!: ";
 		std::cin >> command;
 		std::cin >> row;
